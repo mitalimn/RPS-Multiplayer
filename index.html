@@ -6,29 +6,66 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
-<!--My Style sheets-->
-	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+<!--Style sheets-->
+	
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	
 </head>
 <body>
 	<!--Header -->
-<div class="container">
+<div class="heading-container text-center">
   <div class="jumbotron">
     <h1>RPS Multi Player</h1> 
-    <p>Another P tag</p>
   </div>
 </div>
 
 <!--Form Player details-->	
-	<form class="form-inline">
-	  <div class="form-group">
+	<form class="form-inline text-center">
+	  <div>
 	    <label for="exampleInputName2">Name</label>
 	    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-	  </div>
+	 
 	  
 	  <button type="submit" class="btn btn-primary">Start </button>
+	   </div>
 	</form>
 
+
+<!--player area-->
+
+<div class="row" style=" margin: 0 auto;">	
+
+	<div class="col-sm-4">		
+			<div id="player1"  style="background-color: red; margin: 0 auto;">	
+				<h2>Waiting for player 1</h2>
+			</div>	
+	</div>
+		
+	<div class="col-sm-4" >	
+			<div id="result" style="background-color: blue; margin: 0 auto;">
+					<h2>Result</h2>
+			</div>
+
+	</div>
+
+	<div class="col-sm-4">	
+			<div id="player2"  style="background-color: red; margin: 0 auto;">	
+					<h2>Waiting for player 2</h2>
+			</div>
+	</div>
+</div>
+
+
+
+
+<!--Chat Box window -->
+  <div id="chatbox"></div>
+     <div class="enterText text-center">
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" size="60" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+    </div>
+</div>
 </body>
 </html>
