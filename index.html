@@ -3,9 +3,19 @@
 <head>
 	<title>RPS MultiPlayer</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
+<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+
+  <!-- jquery cdn -->
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <!-- firebase cdn -->
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <!-- momentjs cdn -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
 <!--Style sheets-->
 	
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
@@ -23,10 +33,10 @@
 	<form class="form-inline text-center">
 	  <div>
 	    <label for="exampleInputName2">Name</label>
-	    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+	    <input type="text" class="form-control" id="pName" placeholder="Jane Doe">
 	 
 	  
-	  <button type="submit" class="btn btn-primary">Start </button>
+	  <button type="submit" id="input-player" class="btn btn-primary">Start </button>
 	   </div>
 	</form>
 
@@ -67,5 +77,7 @@
     </form>
     </div>
 </div>
+
+	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 </body>
 </html>
