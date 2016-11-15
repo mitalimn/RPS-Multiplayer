@@ -43,6 +43,10 @@ input{
 .form-inline{
 	margin-bottom: 20px;
 }
+
+#showPlayer{
+	margin: 0 auto;
+}
     #usermsg {
     width:395px;
     border:1px solid #ACD8F0; 

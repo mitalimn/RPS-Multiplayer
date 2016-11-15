@@ -13,9 +13,9 @@
   name = "";
   wins = 0;
   losses = 0;
-
+  playerCount = 2;
   // 2. Button for adding Employees
-$("#input-player").on("click", function() {
+$("#add-player").on("click", function() {
 
   // Grabs user input
   var name = $("#pName").val().trim();
@@ -32,21 +32,26 @@ $("#input-player").on("click", function() {
   database.ref().push(newPlayer);
 
   // Logs everything to console
-
-  alert("hey");
   console.log(newPlayer.name);
   console.log(newPlayer.wins);
   console.log(newPlayer.losses);
 
+
+  $(".playerForm").hide();
+
+  $("#showPlayer").show();
+
+  $("#showPlayer").text( "Hello" +" " + name + "! "+ "You are player 1");
+
+
   // Alert
   alert("newPlayer successfully added");
 
-  // Clears all of the text-boxes
-  // $("#employee-name-input").val("");
-  // $("#role-input").val("");
-  // $("#start-input").val("");
-  // $("#rate-input").val("");
 
   // Prevents moving to new page
   return false;
 });
+
+ 
+
+ 
