@@ -9,6 +9,8 @@
 
   var database = firebase.database();
 
+//Lets user sign in without username and passwd
+  
   //Initial Variables 
   name = "";
   wins = 0;
@@ -17,6 +19,7 @@
   // 2. Button for adding Employees
 $("#add-player").on("click", function() {
 
+	firebase.auth().signInAnonymously();
   // Grabs user input
   var name = $("#pName").val().trim();
 
