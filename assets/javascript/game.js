@@ -1,3 +1,4 @@
+$(document).ready(function(){
  var config = {
     apiKey: "AIzaSyByI5q3zTJSUh0efLiNDuAh_z4E_WeCp6Y",
     authDomain: "rps-multiplayer-135f3.firebaseapp.com",
@@ -7,54 +8,36 @@
   };
   firebase.initializeApp(config);
 
-  var database = firebase.database();
+// var database = firebase.database();
 
-//Lets user sign in without username and passwd
-  
-  //Initial Variables 
-  name = "";
-  wins = 0;
-  losses = 0;
-  playerCount = 2;
-  // 2. Button for adding Employees
-$("#add-player").on("click", function() {
+	$('#add-player').on("click", function(){
+			var playerName = $("#pName").val().trim();
 
-	firebase.auth().signInAnonymously();
-  // Grabs user input
-  var name = $("#pName").val().trim();
+			ref = new Firebase("https://rps-multiplayer-135f3.firebaseio.com/");
 
-  // Creates local "temporary" object for holding employee data
-  var newPlayer = {
-    name: name,
-    wins : wins,
-    losses : losses
-  };
+			ref.once("value" , function(snapshot){
+				var p1 =snapshot.child(players).child('1').exists();
+				var p2 =snapshot.child(players).child('2').exists();
 
+				$('#player1').html('playerName');
+			});
+	});
+});//.ready function
 
-  // Uploads employee data to the database
-  database.ref().push(newPlayer);
+var url = "https://rps-multiplayer-135f3.firebaseio.com/";
+var players = "players";
+var player1 = "1";
+var player2 = "2";
+var turns = 1;
+var wins = 0;
+var losses = 0;
 
-  // Logs everything to console
-  console.log(newPlayer.name);
-  console.log(newPlayer.wins);
-  console.log(newPlayer.losses);
+function play(){
+	var playerCount =0;
 
 
-  $(".playerForm").hide();
+	ref.on("value", function(snapshot){
 
-  $("#showPlayer").show();
+	});
 
-  $("#showPlayer").text( "Hello" +" " + name + "! "+ "You are player 1");
-
-
-  // Alert
-  alert("newPlayer successfully added");
-
-
-  // Prevents moving to new page
-  return false;
-});
-
- 
-
- 
+}
