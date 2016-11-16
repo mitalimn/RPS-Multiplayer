@@ -30,6 +30,7 @@ var player = true; //flag
 
 //This creates root player and child as 1
 $(document).ready(function() {
+
     database.child("player/1").on("child_added", function(snapshot) {
         if (snapshot.key == "name") {
             $("#player1").html(snapshot.val());
@@ -50,10 +51,11 @@ $(document).ready(function() {
       //once addplayer button is clicked 
 
     $('#add-player').on("click", function() {
+// database.remove();
+
        if (player === true) {
        	   console.log("player flag " + player);
            player1 = $('#pName').val().trim();
-            player =false;
            database.update({
                "player/1/name": player1,
                "player/1/choice": choice1,
@@ -61,11 +63,14 @@ $(document).ready(function() {
                "player/1/losses": player1losses
                
            });
-          
+
+           player = false;          
            console.log("player flag " + player);
+
        } else {
-       	
-       	  console.log("player flag " + player);
+
+       	console.log("Else ever executes ????- no");
+       	 // console.log("player flag " + player);
            player2 = $('#pName').val().trim();
            database.update({
                "player/2/name": player2,
@@ -73,8 +78,16 @@ $(document).ready(function() {
                "player/2/wins": player2Wins,
                "player/2/losses": player2losses
            });
-       } //else
+
+            $(".playerForm").hide();
+        } //else
+
+     return false;
    });
+
+
+    //Some code for actual RPS game
+
 
 
 }); //document.ready
