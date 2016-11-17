@@ -217,25 +217,29 @@ $(document).ready(function() {
     	choice2 = "";
 
     	switch(player1){
-    		case "r";
+    		case "r":
     			choice1 = "rock";
     			break;
-    		case "p";
+    		
+    		case "p":
     			choice1 = "paper";
     			break;
-    		case "s";
+    		
+    		case "s":
     			choice1 = "scissor";
     			break;
     	}
 
     	switch(player2){
-    		case "r";
+    		case "r":
     			choice2 = "rock";
     			break;
-    		case "p";
+    		
+    		case "p":
     			choice2 = "paper";
     			break;
-    		case "s";
+    		
+    		case "s":
     			choice2 = "scissor";
     			break;
     	}
