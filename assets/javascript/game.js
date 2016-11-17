@@ -9,7 +9,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database().ref();
 
-var name = "";
+var player1Name = "";
+var player2Name = "";
 var comment = "";
 var player1Exists = false;
 var player2Exists = false;
@@ -17,8 +18,8 @@ var player2Exists = false;
 var choice = "";
 var player1Wins = 0;
 var player2Wins = 0;
-var player2losses = 0;
 var player1losses = 0;
+var player2losses = 0;
 var ties = 0;
 var player1 = "";
 var player2 = "";
@@ -32,6 +33,18 @@ var player = true; //flag
 $(document).ready(function() {
 	//Clears database
 	database.remove();
+	//Initially hide thse
+	    $('#paper1').hide();
+        $('#rock1').hide();
+        $('#scissor1').hide();
+        $('#wins1').hide();
+        $('#losses1').hide(); 
+        $('#paper2').hide();
+        $('#rock2').hide();
+        $('#scissor2').hide();  
+        $('#wins2').hide();
+        $('#losses2').hide(); 
+
     database.child("player/1").on("child_added", function(snapshot) {
         if (snapshot.key == "name") {
             $("#player1").html(snapshot.val());
@@ -54,8 +67,9 @@ $(document).ready(function() {
     $('#add-player').on("click", function() {
 
         if (player === true) {
-            console.log("player flag " + player);
+           // console.log("player flag " + player);
             player1 = $('#pName').val().trim();
+            	player = false;
             database.update({
                 "player/1/name": player1,
                 "player/1/choice": choice1,
@@ -65,12 +79,12 @@ $(document).ready(function() {
             });
             $("#pName").val("");
             player = false;
-            console.log("player flag " + player);
+            //console.log("player flag " + player);
 
         } else {
 
             console.log("Else ever executes ????- no");
-            // console.log("player flag " + player);
+            console.log("player flag " + player);
             player2 = $('#pName').val().trim();
             database.update({
                 "player/2/name": player2,
@@ -118,7 +132,7 @@ $(document).ready(function() {
     //if player 2 chooses rock
     $('#rock2').on("click", function() {
         $('#rock2').addClass('selected');
-        $('#sissor2').hide();
+        $('#scissor2').hide();
         $('#paper2').hide();
         player2 = "r";
     });
@@ -127,7 +141,7 @@ $(document).ready(function() {
 
     $('#paper2').on("click", function() {
         $('#paper2').addClass('selected');
-        $('#sissor2').hide();
+        $('#scissor2').hide();
         $('#rock2').hide();
         player2 = "p";
     });
@@ -142,7 +156,90 @@ $(document).ready(function() {
     });
 
 
+    function choose(){
+    	if((player1 =="r") &&(player2 =="r")){
+    		ties++;
+    		$("#result").html("Its a  tie");
+    	}
+    		else if((player1 =="r") && (player2=="s")){
+    			player1Wins++;
+    			player2losses++;
+    			$('#result').html(player1Name+ "wins!");
+    		}
+    		else if((player1 =="r") &&(player2 =="p")){
+    			player2Wins++;
+    			player1losses++;
+    			$('#result').html(player2Name+ "wins!");
+       		}
+       		else if((player1 =="s")&&(player2 =="s")){
+       			ties++;
+    			$("#result").html("Its a  tie");
+       		}
+       		else if((player1== "s") && (player2 =="r")){
+       			player2Wins++;
+       			player1losses++;
+    			$('#result').html(player2Name+ "wins!");
+       		}
+       		else if((player1== "s") && (player2 =="p")){
+       			player1Wins++;
+    			player2losses++;
+    			$('#result').html(player1Name+ "wins!");
+       		}
+       		else if((player1 == "p") && (player2=="p")){
+       			ties++;
+    			$("#result").html("Its a  tie");
+       		}
+       		else if((player1 == "p") && (player2=="r")){
+       			player1Wins++;
+    			player2losses++;
+    			$('#result').html(player1Name+ "wins!");
+       		}
+       		else if((player1 == "p")&&(player2== "s")){
+       			player2Wins++;
+       			player2losses++;
+       			$('#result').html(player2Name+ "wins!");
+       		}
 
+       		choice();
+       		database.update({
+       			"player/1/wins" : player1Wins,
+       			"player/1/losses" : player1losses,
+       			"player/2/wins" : player2Wins,
+       			"player/2/losses" : player2losses
+       		});   	
+    }//end function choose
+
+
+    //function for individual choice //switch case
+
+    function choice(){
+    	choice1 = "";
+    	choice2 = "";
+
+    	switch(player1){
+    		case "r";
+    			choice1 = "rock";
+    			break;
+    		case "p";
+    			choice1 = "paper";
+    			break;
+    		case "s";
+    			choice1 = "scissor";
+    			break;
+    	}
+
+    	switch(player2){
+    		case "r";
+    			choice2 = "rock";
+    			break;
+    		case "p";
+    			choice2 = "paper";
+    			break;
+    		case "s";
+    			choice2 = "scissor";
+    			break;
+    	}
+    }//end function
 
 
 }); //document.ready
