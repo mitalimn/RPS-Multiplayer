@@ -47,7 +47,10 @@ $(document).ready(function() {
 
     database.child("player/1").on("child_added", function(snapshot) {
         if (snapshot.key == "name") {
-            $("#player1").html(snapshot.val());
+            $("#player1").html("Welcome "+snapshot.val() + " <br>" +"You are player 1");
+        
+
+
         }
     }, function(error) {
         console.log("Read failed" + error.code);
@@ -56,7 +59,12 @@ $(document).ready(function() {
     //To get the second player
     database.child("player/2").on("child_added", function(snapshot) {
         if (snapshot.key == "name") {
-            $("#player2").html(snapshot.val());
+            $("#player2").html("Welcome "+snapshot.val() + " <br>" +"You are player 2");
+        
+   	    $('#paper1').show();
+        $('#rock1').show();
+        $('#scissor1').show();
+
         }
     }, function(error) {
         console.log("Read failed" + error.code);
@@ -77,10 +85,8 @@ $(document).ready(function() {
                 "player/1/losses": player1losses
 
             });
-            $("#pName").val("");
-            player = false;
-            //console.log("player flag " + player);
-
+            //$("#pName").val("");
+            	player = false;
         } else {
 
             console.log("Else ever executes ????- no");
@@ -244,6 +250,5 @@ $(document).ready(function() {
     			break;
     	}
     }//end function
-
 
 }); //document.ready
