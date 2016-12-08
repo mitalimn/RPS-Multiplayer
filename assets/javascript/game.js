@@ -21,12 +21,12 @@ var player2Wins = 0;
 var player1losses = 0;
 var player2losses = 0;
 var ties = 0;
-var player1 = "";
+var player1 = null;
 var player2 = "";
 
 var choice1 = "";
 var choice2 = "";
-var player = true; //flag
+
 
 
 //This creates root player and child as 1
@@ -46,26 +46,26 @@ $(document).ready(function() {
         $('#losses2').hide(); 
 
     database.child("player/1").on("child_added", function(snapshot) {
+       console.log(snapshot.key);
         if (snapshot.key == "name") {
             $("#player1").html("Welcome "+snapshot.val() + " <br>" +"You are player 1");
-        
-
-
         }
-    }, function(error) {
-        console.log("Read failed" + error.code);
-    });
-
-    //To get the second player
-    database.child("player/2").on("child_added", function(snapshot) {
-        if (snapshot.key == "name") {
-            $("#player2").html("Welcome "+snapshot.val() + " <br>" +"You are player 2");
-        
    	    $('#paper1').show();
         $('#rock1').show();
         $('#scissor1').show();
 
-        }
+        
+    }, function(error) {
+        console.log("Read failed" + error.code);
+    
+    });
+
+    //To get the second player
+    database.child("player/2").on("child_added", function(snapshot) {
+        if (snapshot.key() == "name") {
+            $("#player2").html("Welcome "+snapshot.val() + " <br>" +"You are player 2");
+        
+ 	       }
     }, function(error) {
         console.log("Read failed" + error.code);
     });
@@ -74,10 +74,10 @@ $(document).ready(function() {
 
     $('#add-player').on("click", function() {
 
-        if (player === true) {
+        if (player1==null) {
            // console.log("player flag " + player);
             player1 = $('#pName').val().trim();
-            	player = false;
+            	// player = false;
             database.update({
                 "player/1/name": player1,
                 "player/1/choice": choice1,
@@ -86,7 +86,7 @@ $(document).ready(function() {
 
             });
             //$("#pName").val("");
-            	player = false;
+            	// player = false;
         } else {
 
             console.log("Else ever executes ????- no");
@@ -101,11 +101,10 @@ $(document).ready(function() {
 
             $(".playerForm").hide();
         } //else
-
         return false;
     });
 
-
+    
     //Some code for actual RPS game
     //if player 1 chooses rock
 
