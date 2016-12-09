@@ -40,6 +40,14 @@ $('#add-player').on("click", function() {
     return false;
 });
 
+//assign
+
+gameRef.on('value', function(snapshot){
+    player1Exists = snapshot.val().player1;
+    player2Exists = snapshot.val().player2;
+
+    console.log('player1 '+ player1Exists + " "+ "player 2 "+ player2Exists);
+});
 
 
 
