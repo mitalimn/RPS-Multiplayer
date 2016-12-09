@@ -36,7 +36,7 @@ $('#add-player').on("click", function() {
         gameRef.child(player1).set(p1Name);
     }
 
-    $(pName).val('');
+    $('#pName').val('');
     return false;
 });
 
@@ -45,9 +45,17 @@ $('#add-player').on("click", function() {
 gameRef.on('value', function(snapshot){
     player1Exists = snapshot.val().player1;
     player2Exists = snapshot.val().player2;
-
-    console.log('player1 '+ player1Exists + " "+ "player 2 "+ player2Exists);
+console.log("player1Exists ", player1Exists);
+    if(p1Name){
+        gameRef.child('player1').set(p1Name);
+    }
+    else if(p2Name){
+        gameRef.child('player2').set(p2Name);
+    }
+console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
 });
+
+
 
 
 
