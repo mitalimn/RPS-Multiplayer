@@ -17,14 +17,18 @@ input{
 	height: 300px;
 	width: 300px;
 }
+
+#buttonDiv1, #buttonDiv2{
+	text-align: center;
+}
+#ROCK, #PAPER,#SCISSORS{
+	margin: 0px 20px 0px 20px;
+}
 #result{
 	margin: 5px;
 	height: 300px;
 	width: 300px;
 }
-
-
-
 #chatbox {
     text-align:left;
     margin:0 auto;
@@ -44,9 +48,7 @@ input{
 	margin-bottom: 20px;
 }
 
-#showPlayer{
-	margin: 0 auto;
-}
+
     #usermsg {
     width:395px;
     border:1px solid #ACD8F0; 

@@ -42,14 +42,24 @@ var player2Exists;
 
 function addButton(player){
     var choices = ['ROCK', 'PAPER','SCISSORS'];
-
+    var buttonContainer = ('<div>');
     for(var i=0;i<choices.length;i++){
         var btn = ('<button>', {
             text: choices[i],
-            id: choices[i]
+            id: choices[i],
+            class: rpsBtn
         });
         $('#'+ player).append(btn);
+        $(buttonContainer).append(btn);
+    };
+
+    if(p1Name){
+        $('#buttonDiv1').html(buttonContainer);
     }
+    else if (p2Name) {
+        $('#buttonDiv2').html(buttonContainer);   
+    }
+
 }
 
 //checks if users are present initially - if/else
@@ -82,12 +92,35 @@ $('#add-player').on("click", function() {
     return false;
 });
 
+//on rock paper scissor button click
+
+$('#buttonDiv1', '#buttonDiv2').on("click", function(){
+    if(this.id==="ROCK"){
+        playerChoice = this.id;
+    }
+    else if(this.id==="PAPER"){
+        playerChoice = this.id;
+    }
+    else if(this.id==="SCISSORS"){
+        playerChoice = this.id;
+    };
+
+    if(p1Name){
+        gameRef.child('player1').child('dbPlayerChoice').set(playerChoice);
+        $('#buttonDiv1').text("Waiting for Player 2 to choose");
+    }
+    else if(p2Name){
+        gameRef.child('player2').child('dbPlayerChoice').set(playerChoice);
+        $('#buttonDiv2').text("Waiting for Player 1 to choose");
+    };
+});
+
 //assign
 
 gameRef.on('value', function(snapshot){
     player1Exists = snapshot.val().player1.dbPlayerName;
     player2Exists = snapshot.val().player2.dbPlayerName;
-console.log("player1Exists ", player1Exists);
+console.log("player1Exists "+ player1Exists);
     if(p1Name){
         gameRef.child('player1').child('dbPlayerName').set(p1Name);
     }
