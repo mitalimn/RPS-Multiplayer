@@ -14,8 +14,8 @@ var gameRef = firebase.database().ref();
 gameRef.child('player1').set('');
 gameRef.child('player2').set('');
 
-var p1Name="";
-var p2Name="";
+var p1Name;
+var p2Name;
 
 var player1Exists;
 var player2Exists;
@@ -26,14 +26,21 @@ $('#add-player').on("click", function() {
     if(!player1Exists && !player2Exists){
         p1Name = $('#pName').val().trim();
         gameRef.child(player1).set(p1Name);
+        $(".playerForm").html("Welcome "+snapshot.val()+
+         " <br>" +"You are player 1");
+
     }
     else if(player1Exists && !player2Exists) {
         p2Name = $('#pName').val().trim();
         gameRef.child(player2).set(p2Name);
+        $(".playerForm").html("Welcome "+snapshot.val() +
+         " <br>" +"You are player 2");
     }
     else if(!player1Exists && player2Exists){
         p1Name = $('#pName').val().trim();
         gameRef.child(player1).set(p1Name);
+        $("#player1").html("Welcome "+snapshot.val() + 
+            " <br>" +"You are player 1");
     }
 
     $('#pName').val('');
@@ -53,6 +60,21 @@ console.log("player1Exists ", player1Exists);
         gameRef.child('player2').set(p2Name);
     }
 console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
+
+    if(!player1Exists){
+        $('#p1wait').html("Waiting for player 1");
+    }
+    else if(player1Exists){
+        $('#p1wait').html(player1Exists);
+    }
+
+      if(!player2Exists){
+        $('#p2wait').html("Waiting for player 2");
+    }
+    else if(player1Exists){
+        $('#p2wait').html(player2Exists);
+    }
+
 });
 
 
