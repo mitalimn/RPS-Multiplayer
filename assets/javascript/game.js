@@ -38,27 +38,44 @@ var p2Name="";
 var player1Exists;
 var player2Exists;
 
+//populate buttons for rock paper and scissors
+
+function addButton(player){
+    var choices = ['ROCK', 'PAPER','SCISSORS'];
+
+    for(var i=0;i<choices.length;i++){
+        var btn = ('<button>', {
+            text: choices[i],
+            id: choices[i]
+        });
+        $('#'+ player).append(btn);
+    }
+}
+
 //checks if users are present initially - if/else
 
 $('#add-player').on("click", function() {
     if(!player1Exists && !player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).child(playerName).set(p1Name);
+        gameRef.child(player1).child(dbPlayerName).set(p1Name);
         $(".playerForm").html("Welcome "+snapshot.val()+
          " <br>" +"You are player 1");
+        addButton();
 
     }
     else if(player1Exists && !player2Exists) {
         p2Name = $('#pName').val().trim();
-        gameRef.child(player2).child().set(p2Name);
+        gameRef.child(player2).child(dbPlayerName).set(p2Name);
         $(".playerForm").html("Welcome "+snapshot.val() +
          " <br>" +"You are player 2");
+        addButton();
     }
     else if(!player1Exists && player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).child().set(p1Name);
+        gameRef.child(player1).child(dbPlayerName).set(p1Name);
         $("#player1").html("Welcome "+snapshot.val() + 
             " <br>" +"You are player 1");
+        addButton();
     }
 
     $('#pName').val('');
@@ -68,14 +85,14 @@ $('#add-player').on("click", function() {
 //assign
 
 gameRef.on('value', function(snapshot){
-    player1Exists = snapshot.val().player1.playerName;
-    player2Exists = snapshot.val().player2.playerName;
+    player1Exists = snapshot.val().player1.dbPlayerName;
+    player2Exists = snapshot.val().player2.dbPlayerName;
 console.log("player1Exists ", player1Exists);
     if(p1Name){
-        gameRef.child('player1').child('playerName').set(p1Name);
+        gameRef.child('player1').child('dbPlayerName').set(p1Name);
     }
     else if(p2Name){
-        gameRef.child('player2').child('playerName').set(p2Name);
+        gameRef.child('player2').child('dbPlayerName').set(p2Name);
     }
 console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
 
@@ -86,23 +103,13 @@ console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
         $('#p1wait').html(player1Exists);
     }
 
-      if(!player2Exists){
+    if(!player2Exists){
         $('#p2wait').html("Waiting for player 2");
     }
     else if(player1Exists){
         $('#p2wait').html(player2Exists);
     }
-
 });
-
-
-
-
-
-
-
-
-
 
 //=============================
 // var config = {
