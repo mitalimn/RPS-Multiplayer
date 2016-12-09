@@ -11,11 +11,29 @@ var gameRef = firebase.database().ref();
 
 //Initially set the data empty
 
-gameRef.child('player1').set('');
-gameRef.child('player2').set('');
+var playerName = "";
+var player1losses = 0;
+var player1Wins = 0;
+var player2losses = 0;
+var player2Wins = 0;
+var playerChoice = "";
 
-var p1Name;
-var p2Name;
+gameRef.child('player1').set({
+    dbPlayerName: playerName,
+    dbPlayerWins: player1Wins,
+    dbPlayerLosses:player1losses,
+    dbPlayerChoice: playerChoice
+});
+
+gameRef.child('player2').set({
+    dbPlayerName: playerName,
+    dbPlayerWins: player2Wins,
+    dbPlayerLosses:player2losses,
+    dbPlayerChoice: playerChoice
+});
+
+var p1Name="";
+var p2Name="";
 
 var player1Exists;
 var player2Exists;
@@ -25,20 +43,20 @@ var player2Exists;
 $('#add-player').on("click", function() {
     if(!player1Exists && !player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).set(p1Name);
+        gameRef.child(player1).child(playerName).set(p1Name);
         $(".playerForm").html("Welcome "+snapshot.val()+
          " <br>" +"You are player 1");
 
     }
     else if(player1Exists && !player2Exists) {
         p2Name = $('#pName').val().trim();
-        gameRef.child(player2).set(p2Name);
+        gameRef.child(player2).child().set(p2Name);
         $(".playerForm").html("Welcome "+snapshot.val() +
          " <br>" +"You are player 2");
     }
     else if(!player1Exists && player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).set(p1Name);
+        gameRef.child(player1).child().set(p1Name);
         $("#player1").html("Welcome "+snapshot.val() + 
             " <br>" +"You are player 1");
     }
@@ -50,14 +68,14 @@ $('#add-player').on("click", function() {
 //assign
 
 gameRef.on('value', function(snapshot){
-    player1Exists = snapshot.val().player1;
-    player2Exists = snapshot.val().player2;
+    player1Exists = snapshot.val().player1.playerName;
+    player2Exists = snapshot.val().player2.playerName;
 console.log("player1Exists ", player1Exists);
     if(p1Name){
-        gameRef.child('player1').set(p1Name);
+        gameRef.child('player1').child('playerName').set(p1Name);
     }
     else if(p2Name){
-        gameRef.child('player2').set(p2Name);
+        gameRef.child('player2').child('playerName').set(p2Name);
     }
 console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
 
