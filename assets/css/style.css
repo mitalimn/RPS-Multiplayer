@@ -6,16 +6,25 @@
 input{
 	margin: 5px;
 }
+body{
+	background-image: url('../images/rps.png');
+}
+#chatbox{
+	height: 50px;
+	width: 200px;
+}
 
 #player1{
 	margin: 5px;
 	height: 300px;
 	width: 300px;
+
 }
 #player2{
 	margin: 5px;
 	height: 300px;
 	width: 300px;
+	float: left;
 }
 
 #buttonDiv1, #buttonDiv2{
@@ -28,6 +37,7 @@ input{
 	margin: 5px;
 	height: 300px;
 	width: 300px;
+	float: left;
 }
 #chatbox {
     text-align:left;

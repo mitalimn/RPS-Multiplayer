@@ -67,23 +67,23 @@ function addButton(player){
 $('#add-player').on("click", function() {
     if(!player1Exists && !player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).child(dbPlayerName).set(p1Name);
-        $(".playerForm").html("Welcome "+snapshot.val()+
+        gameRef.child(player1).child('dbPlayerName').set(p1Name);
+        $(".playerForm").html("Welcome "+ p1Name+
          " <br>" +"You are player 1");
         addButton();
 
     }
     else if(player1Exists && !player2Exists) {
         p2Name = $('#pName').val().trim();
-        gameRef.child(player2).child(dbPlayerName).set(p2Name);
-        $(".playerForm").html("Welcome "+snapshot.val() +
+        gameRef.child(player2).child('dbPlayerName').set(p2Name);
+        $(".playerForm").html("Welcome "+ p2Name +
          " <br>" +"You are player 2");
         addButton();
     }
     else if(!player1Exists && player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).child(dbPlayerName).set(p1Name);
-        $("#player1").html("Welcome "+snapshot.val() + 
+        gameRef.chil9d(player1).child('dbPlayerName').set(p1Name);
+        $("#player1").html("Welcome "+ p1Name + 
             " <br>" +"You are player 1");
         addButton();
     }
@@ -103,7 +103,7 @@ $('#buttonDiv1', '#buttonDiv2').on("click", function(){
     }
     else if(this.id==="SCISSORS"){
         playerChoice = this.id;
-    };
+    }
 
     if(p1Name){
         gameRef.child('player1').child('dbPlayerChoice').set(playerChoice);
@@ -112,7 +112,7 @@ $('#buttonDiv1', '#buttonDiv2').on("click", function(){
     else if(p2Name){
         gameRef.child('player2').child('dbPlayerChoice').set(playerChoice);
         $('#buttonDiv2').text("Waiting for Player 1 to choose");
-    };
+    }
 });
 
 //assign
@@ -142,6 +142,25 @@ console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
     else if(player1Exists){
         $('#p2wait').html(player2Exists);
     }
+});
+
+//chat 
+
+$('#chat').on("click", function(){
+    var userMsg = $('#usermsg').val();
+    if(userMsg == false){
+        return false;
+    }
+
+    if(p1Name){
+        gameRef.child('message1').set(p1Name + ':' +userMsg+'<br>');
+        $('#usermsg').val('');
+    }
+    else if(p2Name){
+        gameRef.child('message2').set(p2Name + ':' +userMsg+'<br>');
+        $('#usermsg').val('');
+    }
+   return false;
 });
 
 //=============================

@@ -28,7 +28,8 @@
 </div>
 
 <!--Form Player details-->	
-	<form class="form-inline text-center playerForm">
+<div class="playerForm">
+	<form class="form-inline text-center">
 	  <div>
 	    <label for="labelName">Name</label>
 	    <input type="text" class="form-control" id="pName" placeholder="Jane Doe">
@@ -36,8 +37,7 @@
 	  <button type="submit" id="add-player" class="btn btn-primary">Start </button>
 	   </div>
 	</form>
-	<div id= "showPlayer"></div>
-
+</div>
 <!--player area-->
 
 <div class="row" style=" margin: 0 auto;">	
@@ -68,13 +68,18 @@
 </div>
 
 <!--Chat Box window -->
-  <div id="chatbox"></div>
+<div id="row">
+  <div id="chatbox">
+  	
+  </div>
      <div class="enterText text-center">
     <form name="message" action="">
-        <input name="usermsg" type="text" id="usermsg" size="60" />
-        <input name="submitmsg" type="submit"  id="chat" value="Send" />
+        <input name="usermsg" type="text" id="usermsg" size="60">
+        <button class="btn btn-primary" name="submitmsg" type="submit"  id="chat">
+        Send</button>
     </form>
     </div>
+</div>
 </div>
 	
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
