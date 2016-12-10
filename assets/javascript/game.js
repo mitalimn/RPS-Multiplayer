@@ -34,14 +34,11 @@ gameRef.child('player2').set({
 gameRef.child('message1').set('');
 gameRef.child('message2').set('');
 
-
 var p1Name='';
 var p2Name='';
 
 var player1Exists;
 var player2Exists;
-
-
 
 //populate buttons for rock paper and scissors
 
@@ -53,10 +50,12 @@ function addButton(){
         console.log('i'+i);
         var buttons = ('<button>', {
             text: choices[i],
-            id: choices[i]
-        });
-        if(p1Name){buttons.addClass('rpsbtn btn btn-primary')};
-        if(p2Name){buttons.addClass('rpsbtn btn btn-primary')}; 
+            id: choices[i],
+            class: 'rpsbtn'
+         })
+        // .addClass('rpsbtn btn btn-primary');
+        // if(p1Name){buttons.addClass('rpsbtn btn btn-primary')};
+        // if(p2Name){buttons.addClass('rpsbtn btn btn-primary')}; 
         $(buttonContainer).append(buttons);
     }
 
