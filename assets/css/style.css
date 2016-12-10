@@ -16,6 +16,10 @@ body {
     width: 200px;
 }
 
+#scoreDiv2, #scoreDiv1{
+	margin-top: 20px;
+}
+
 #player1 {
     margin: 5px;
     height: 200px;
@@ -32,6 +36,7 @@ body {
 #buttonDiv1,
 #buttonDiv2 {
     text-align: center;
+    cursor: pointer;
 }
 
 #ROCK,

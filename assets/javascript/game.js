@@ -51,7 +51,7 @@ function addButton(){
         var buttons = ('<button>', {
             text: choices[i],
             id: choices[i],
-            class: 'rpsbtn'
+            class: 'rpsbtn btn btn-primary'
          })
         // .addClass('rpsbtn btn btn-primary');
         // if(p1Name){buttons.addClass('rpsbtn btn btn-primary')};
