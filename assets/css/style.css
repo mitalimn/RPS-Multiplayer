@@ -1,72 +1,77 @@
-.col-sm-4{
-	margin:2px;
-	
-	margin: 0 auto;
-}
-input{
-	margin: 5px;
-}
-body{
-	background-image: url('../images/rps.png');
-}
-#chatbox{
-	height: 50px;
-	width: 200px;
+.col-sm-4 {
+    margin: 2px;
+    margin: 0 auto;
 }
 
-#player1{
-	margin: 5px;
-	height: 300px;
-	width: 300px;
-
-}
-#player2{
-	margin: 5px;
-	height: 300px;
-	width: 300px;
-	float: left;
+input {
+    margin: 5px;
 }
 
-#buttonDiv1, #buttonDiv2{
-	text-align: center;
+body {
+    background-image: url('../images/rps.png');
 }
-#ROCK, #PAPER,#SCISSORS{
-	margin: 0px 20px 0px 20px;
-}
-#result{
-	margin: 5px;
-	height: 300px;
-	width: 300px;
-	float: left;
-}
+
 #chatbox {
-    text-align:left;
-    margin:0 auto;
-    margin-bottom:10px;
-    padding:10px;
-    background:#fff;
-    height:240px;
-    width:430px;
-    border:1px solid #ACD8F0;
+    height: 50px;
+    width: 200px;
+}
+
+#player1 {
+    margin: 5px;
+    height: 200px;
+    width: 300px;
+}
+
+#player2 {
+    margin: 5px;
+    height: 200px;
+    width: 300px;
+    float: left;
+}
+
+#buttonDiv1,
+#buttonDiv2 {
+    text-align: center;
+}
+
+#ROCK,
+#PAPER,
+#SCISSORS {
+    margin: 0px 20px 0px 20px;
+}
+
+#result {
+    margin: 5px;
+    height: 200px;
+    width: 300px;
+    float: left;
+}
+
+#chatbox {
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    height: 240px;
+    width: 430px;
+    border: 1px solid #ACD8F0;
     margin-top: 20px;
-    overflow:auto;
-     }
-   
-
-
-.form-inline{
-	margin-bottom: 20px;
+    overflow: scroll;
 }
 
+.form-inline {
+    margin-bottom: 20px;
+}
 
-    #usermsg {
-    width:395px;
-    border:1px solid #ACD8F0; 
+#usermsg {
+    width: 395px;
+    border: 1px solid #ACD8F0;
     padding: 20px;
-     margin-top: 10px;
+    margin-top: 10px;
 }
 
-.enterText{
-	margin-top: 10px;
-    margin:0 auto;
+.enterText {
+    margin-top: 10px;
+    margin: 0 auto;
 }
