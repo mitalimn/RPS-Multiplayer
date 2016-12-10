@@ -27,10 +27,13 @@ gameRef.child('player1').set({
 
 gameRef.child('player2').set({
     dbPlayerName: playerName,
-    dbPlayerWins: player2Wins,
-    dbPlayerLosses:player2losses,
+    dbPlayerWins: player1Wins,
+    dbPlayerLosses:player1losses,
     dbPlayerChoice: playerChoice
 });
+
+gameRef.child('message1').set('');
+gameRef.child('message2').set('');
 
 var p1Name="";
 var p2Name="";
@@ -40,16 +43,20 @@ var player2Exists;
 
 //populate buttons for rock paper and scissors
 
-function addButton(player){
+function addButton(){
     var choices = ['ROCK', 'PAPER','SCISSORS'];
     var buttonContainer = ('<div>');
     for(var i=0;i<choices.length;i++){
         var btn = ('<button>', {
             text: choices[i],
             id: choices[i],
-            class: rpsBtn
         });
-        $('#'+ player).append(btn);
+        if(p1Name){
+            btn.addClass("rpsbtn btn btn-primary");
+        }
+        if(p2Name){
+            btn.addClass("rpsbtn btn btn-primary");
+        }
         $(buttonContainer).append(btn);
     };
 
@@ -59,7 +66,6 @@ function addButton(player){
     else if (p2Name) {
         $('#buttonDiv2').html(buttonContainer);   
     }
-
 }
 
 //checks if users are present initially - if/else
@@ -67,7 +73,8 @@ function addButton(player){
 $('#add-player').on("click", function() {
     if(!player1Exists && !player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.child(player1).child('dbPlayerName').set(p1Name);
+        playerName = p1Name; 
+        gameRef.child('player1').child('dbPlayerName').set(p1Name);
         $(".playerForm").html("Welcome "+ p1Name+
          " <br>" +"You are player 1");
         addButton();
@@ -75,14 +82,16 @@ $('#add-player').on("click", function() {
     }
     else if(player1Exists && !player2Exists) {
         p2Name = $('#pName').val().trim();
-        gameRef.child(player2).child('dbPlayerName').set(p2Name);
+        playerName = p2Name; 
+        gameRef.child('player2').child('dbPlayerName').set(p2Name);
         $(".playerForm").html("Welcome "+ p2Name +
          " <br>" +"You are player 2");
         addButton();
     }
     else if(!player1Exists && player2Exists){
         p1Name = $('#pName').val().trim();
-        gameRef.chil9d(player1).child('dbPlayerName').set(p1Name);
+        playerName = p1Name; 
+        gameRef.child('player1').child('dbPlayerName').set(p1Name);
         $("#player1").html("Welcome "+ p1Name + 
             " <br>" +"You are player 1");
         addButton();
@@ -94,7 +103,7 @@ $('#add-player').on("click", function() {
 
 //on rock paper scissor button click
 
-$('#buttonDiv1', '#buttonDiv2').on("click", function(){
+$('#buttonDiv1', '#buttonDiv2').on("click" ,'.rpsbtn', function(){
     if(this.id==="ROCK"){
         playerChoice = this.id;
     }
@@ -118,16 +127,35 @@ $('#buttonDiv1', '#buttonDiv2').on("click", function(){
 //assign
 
 gameRef.on('value', function(snapshot){
-    player1Exists = snapshot.val().player1.dbPlayerName;
-    player2Exists = snapshot.val().player2.dbPlayerName;
+
+    var objP1 = snapshot.val().player1;
+    var objP2 = snapshot.val().player2;
+
+    player1Exists =objP1.dbPlayerName;
+    player2Exists = objP2.dbPlayerName;
+
 console.log("player1Exists "+ player1Exists);
+
     if(p1Name){
-        gameRef.child('player1').child('dbPlayerName').set(p1Name);
+        gameRef.child('player1').child('dbPlayerName').set(playerName);
+        gameRef.child('player1').child('dbPlayerChoice').set(playerChoice);
+        gameRef.child('player1').child('dbPlayerWins').set(player1Wins);
+        gameRef.child('player1').child('dbPlayerLosses').set(player1losses);
+
+        $('#choiceDiv1').html(objP1.dbPlayerChoice + '<br>');
+        $('#scoreDiv1').html('You won  '+objP1.dbPlayerWins + '<br>');
+        $('#scoreDiv1').append('You loose  '+objP1.dbPlayerLosses);
     }
     else if(p2Name){
-        gameRef.child('player2').child('dbPlayerName').set(p2Name);
+        gameRef.child('player2').child('dbPlayerName').set(playerName);
+        gameRef.child('player2').child('dbPlayerChoice').set(playerChoice);
+        gameRef.child('player2').child('dbPlayerWins').set(player2Wins);
+        gameRef.child('player2').child('dbPlayerLosses').set(player2losses);
+
+        $('#choiceDiv2').html(objp2.dbPlayerChoice + '<br>');
+        $('#scoreDiv2').html('You won  '+objP2.dbPlayerWins + '<br>');
+        $('#scoreDiv2').append('You loose  '+objP2.dbPlayerLosses);
     }
-console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
 
     if(!player1Exists){
         $('#p1wait').html("Waiting for player 1");
@@ -142,6 +170,56 @@ console.log('player1 '+ p1Name + " "+ "player 2 "+ p2Name);
     else if(player1Exists){
         $('#p2wait').html(player2Exists);
     }
+
+    var dbPlayer1Choice = snapshot.val().player1.dbPlayerChoice;
+    var dbPlayer2Choice = snapshot.val().player2.dbPlayerChoice;
+
+
+    if(!dbPlayer1Choice){
+        addButton(); //display the button again
+    }
+    else if(!dbPlayer2Choice){
+        addButton();
+    }
+
+    //tie logic
+
+    if(dbPlayer1Choice === dbPlayer2Choice){
+        playerChoice = "";
+
+    }
+    else if(dbPlayer1Choice === 'ROCK' && dbPlayer2Choice === 'PAPER'){
+        playerChoice = "";
+        player1losses++;
+        player2Wins++;
+    }
+    else if(dbPlayer1Choice === 'PAPER' && dbPlayer2Choice === 'SCISSORS'){
+        playerChoice = "";
+        player1losses++;
+        player2Wins++;
+    }
+     else if(dbPlayer1Choice === 'SCISSORS' && dbPlayer2Choice === 'ROCK'){
+        playerChoice = "";
+        player1losses++;
+        player2Wins++;
+    }
+     else if(dbPlayer2Choice === 'ROCK' && dbPlayer1Choice === 'PAPER'){
+        playerChoice = "";
+        player2losses++;
+        player1Wins++;
+    }
+     else if(dbPlayer2Choice === 'PAPER' && dbPlayer1Choice === 'SCISSORS'){
+        playerChoice = "";
+        player2losses++;
+        player1Wins++;
+    }
+     else if(dbPlayer2Choice === 'SCISSORS' && dbPlayer2Choice === 'ROCK'){
+        playerChoice = "";
+        player2losses++;
+        player1Wins++;
+    }
+
+
 });
 
 //chat 
